@@ -10,6 +10,7 @@ from . import PROTOCOL_VERSION
 
 MAX_MESSAGE_BYTES = 64 * 1024
 ALLOWED_TYPES = {
+    "pair.challenge",
     "pair.request",
     "connection.ping",
     "connection.pong",
