@@ -11,7 +11,7 @@ from websockets.asyncio.server import ServerConnection, serve
 from websockets.exceptions import ConnectionClosed
 
 from .config import Settings
-from .discovery import DiscoveryProtocol
+from .discovery import DiscoveryProtocol, get_local_ipv4_addresses
 from .pairing import PairingManager
 from .protocol import ProtocolError, decode_message, encode_message, make_message
 
@@ -137,6 +137,8 @@ class OrbDockServer:
             self.settings.host,
             self.settings.websocket_port,
         )
+        for address in get_local_ipv4_addresses():
+            logger.info("Manual Android connection address: %s:%s", address, self.settings.websocket_port)
         try:
             async with serve(
                 self.handle_connection,
