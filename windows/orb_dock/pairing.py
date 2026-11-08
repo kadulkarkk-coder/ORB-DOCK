@@ -52,6 +52,11 @@ class PairingManager:
         return self._pin
 
     @property
+    def current_code(self) -> str:
+        """Return the active code for local display in the Windows console."""
+        return self._pin
+
+    @property
     def expires_in(self) -> int:
         return max(0, int(self._expires_at - time.monotonic()))
 
