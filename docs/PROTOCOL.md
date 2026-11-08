@@ -24,6 +24,7 @@ The PIN is not sent as a protocol field. The pairing challenge is fresh per conn
 
 ## Message types in Phase 1
 
+- `pair.challenge`: host nonce and remaining pairing-code lifetime.
 - `pair.request`: client proof and device metadata.
 - `connection.ping`: client heartbeat.
 - `connection.pong`: host heartbeat response.
