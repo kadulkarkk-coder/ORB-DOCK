@@ -79,7 +79,7 @@ class OrbDockServer:
 
             session_id = secrets.token_urlsafe(24)
             logger.info("Paired device %s (%s) from %s", device_name, device_id, peer)
-            logger.info("New one-time pairing code: %s", self.pairing._pin)
+            logger.info("New one-time pairing code: %s", self.pairing.current_code)
             await websocket.send(
                 encode_message(
                     make_message(
@@ -131,7 +131,7 @@ class OrbDockServer:
             "LAN development mode: WebSocket traffic is not TLS-encrypted. "
             "Use only on a trusted private network."
         )
-        logger.info("Pairing code (valid %ss): %s", self.settings.pairing_code_ttl, self.pairing._pin)
+        logger.info("Pairing code (valid %ss): %s", self.settings.pairing_code_ttl, self.pairing.current_code)
         logger.info(
             "WebSocket listening on %s:%s",
             self.settings.host,
