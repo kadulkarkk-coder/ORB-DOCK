@@ -67,6 +67,7 @@ private fun OrbDockScreen(
     var hosts by remember { mutableStateOf(emptyList<DiscoveredHost>()) }
     var selectedHost by remember { mutableStateOf<DiscoveredHost?>(null) }
     var pin by remember { mutableStateOf("") }
+    var manualAddress by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("Ready to discover your Windows PC.") }
     var scanning by remember { mutableStateOf(false) }
 
