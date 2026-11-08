@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ipaddress
 import json
 import logging
 import socket
@@ -36,6 +37,22 @@ class DiscoveryProtocol(DatagramProtocol):
 
     def error_received(self, exc: Exception) -> None:
         logger.warning("UDP discovery socket error: %s", exc)
+
+
+def get_local_ipv4_addresses() -> list[str]:
+    """Return private IPv4 addresses that may be used for manual client entry."""
+    try:
+        records = socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET, socket.SOCK_DGRAM)
+    except OSError:
+        return []
+    addresses = {
+        record[4][0]
+        for record in records
+        if ipaddress.ip_address(record[4][0]).is_private
+        and not ipaddress.ip_address(record[4][0]).is_loopback
+        and not ipaddress.ip_address(record[4][0]).is_link_local
+    }
+    return sorted(addresses)
 
 
 def discovery_socket_options() -> list[tuple[int, int, int]]:
