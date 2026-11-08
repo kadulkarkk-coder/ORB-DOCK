@@ -14,7 +14,7 @@ The first milestone establishes:
 - Heartbeat and connection lifecycle handling.
 - Unit tests for protocol and pairing primitives.
 
-The Android client is planned as a Kotlin + Jetpack Compose application in a later Phase 1 task. No Gemini, cloud account, or paid API is required.
+The Android connection preview is now implemented in Kotlin + Jetpack Compose. It supports UDP discovery, manual IPv4 entry, PIN proof generation, WebSocket pairing, connection status, and heartbeat. No Gemini, cloud account, or paid API is required.
 
 ## Repository layout
 
@@ -53,9 +53,9 @@ pip install -r requirements.txt
 python -m orb_dock.main
 ```
 
-The host prints its temporary pairing code and listening port at startup. Keep both devices on the same trusted private Wi-Fi network. Allow Python through Windows Firewall only on **Private networks** when prompted.
+The host prints its temporary pairing code, listening port, and detected LAN IPv4 addresses at startup. Keep both devices on the same trusted private Wi-Fi network. Allow Python through Windows Firewall only on **Private networks** when prompted.
 
-## Run tests
+## Android app setup\n\nOpen the `android/` folder in Android Studio, sync Gradle, connect your Android phone, and run the `app` configuration. See [android/README.md](android/README.md) for details. If UDP discovery does not work on your router, use the manual IPv4 field and an address printed by the Windows host.\n\n## Run tests
 
 From the repository root:
 
